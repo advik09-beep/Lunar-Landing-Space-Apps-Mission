@@ -1,10 +1,10 @@
 # STATUS — Lunar Landing Site Navigator
 
 Current milestone: M0 SETUP. No milestone has passed yet.
-Lane A (Claude Code): MOCK /lib/visibility.js and /data/sites.js committed (10 sites; 6 sourced, 4 south pole sites still unverified).
+Lane A (Claude Code): MOCK /lib/visibility.js and /data/sites.js committed (10 sites, all sourced).
 Lane B (ChatGPT/Codex): web/index.html is committed and imports only listSites() from ../lib/visibility.js.
 Failing test: No confirmed public live URL yet. listSites() now exists.
-Next single task for Lane A: source the 4 south pole sites (pole: NASA Oct 2024 nine-region list, one representative point each).
+Next single task for Lane A: M1 step 1 — confirm the Horizons lunar-surface observer setup from its docs, then fetch one verified site (Apollo 11) as a test.
 Next Lane B blocker: configure/verify static hosting and run M0 acceptance test once the shared module is available.
 
 ## Lane A notes for Lane B (2026-11-12)
@@ -47,7 +47,7 @@ These are engineering concerns for discussion, not unilateral changes to decisio
 
 ## M0 acceptance checklist
 - [x] Lane B added /web/index.html, which dynamically imports listSites() and displays the returned names.
-- [ ] Lane A committed a working /lib/visibility.js and ten sourced sites. (visibility.js done; 6/10 sourced)
+- [x] Lane A committed a working /lib/visibility.js and ten sourced sites. (done: 10/10 sourced)
 - [ ] Public static URL verified to show ten actual site names.
 - [ ] Both humans confirm M0 pass; then update this STATUS.md.
 
@@ -59,3 +59,4 @@ Lane A owns /scripts, /data, /lib. Lane B owns /web. STATUS.md is shared for coo
 - Apollo 11/12/17 landing times confirmed on NSSDCA spacecraft pages.
 - Chandrayaan-3 landing time is secondary (collectSPACE) and approximate; Chandrayaan-3 kind changed to 'agency'.
 - No source here states a reference frame except JAXA (ME); frames to be fixed in /data/README.md at M1.
+- South pole sites now from NASA's 2024-10-28 nine-region list: Peak near Cabeus B, Haworth, Malapert Massif, Nobile Rim 2. Each is a 'representative point' = center of the LROC preliminary NAC mosaic for that region, not an official region center. IDs CHANGED: sp_shackleton and sp_connecting removed; added sp_cabeus_b_peak, sp_nobile_rim2; sp_haworth and sp_malapert kept with new coords. Better points would come from USGS region shapefiles (doi:10.5066/P1MEQ6UK), not yet opened. Slater Plain had no citable point.
