@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Lunar Landing Site Navigator</title>
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f0f4fb;
+      background: #0b1322;
+    }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+    main { width: min(100%, 680px); padding: clamp(24px, 6vw, 48px); border: 1px solid #33445e; border-radius: 18px; background: #142035; }
+    .eyebrow { color: #a6c9fa; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; }
+    h1 { margin: 12px 0 8px; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.15; }
+    p { color: #c5d2e4; }
+    #status { margin: 28px 0 12px; color: #d9e9fb; }
+    #status[data-state="error"] { color: #ffd4a3; }
+    #sites { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; padding: 0; list-style: none; }
+    #sites li { padding: 14px 16px; border: 1px solid #3a4e6b; border-radius: 10px; background: #1c2d46; }
+    .note { margin: 24px 0 0; font-size: .85rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">NASA Space Apps 2026 · M0 integration check</div>
+    <h1>Lunar Landing Site Navigator</h1>
+    <p>Available landing sites, supplied by the shared visibility data module.</p>
+    <div id="status" role="status" aria-live="polite">Loading sites…</div>
+    <ul id="sites" aria-label="Landing sites"></ul>
+    <p class="note">This page does not calculate Sun or Earth positions. It reads site data from <code>/lib/visibility.js</code>.</p>
+  </main>
+  <script type="module">
+    const status = document.getElementById("status");
+    const siteList = document.getElementById("sites");
+
+    try {
+      // Sole data integration point; owned by Lane A.
+      const { listSites } = await import("../lib/visibility.js");
+      if (typeof listSites !== "function") {
+        throw new TypeError("listSites() is not exported");
+      }
+      const sites = await listSites();
+      if (!Array.isArray(sites)) {
+        throw new TypeError("listSites() must return an array");
+      }
+      if (sites.length === 0) {
+        status.textContent = "No landing sites have been supplied yet.";
+      } else {
+        const fragment = document.createDocumentFragment();
+        for (const site of sites) {
+          const li = document.createElement("li");
+          li.textContent = String(site.name ?? site.id ?? "Unnamed site");
+          fragment.appendChild(li);
+        }
+        siteList.replaceChildren(fragment);
+        status.textContent = `Loaded ${sites.length} landing site${sites.length === 1 ? "" : "s"}.`;
+      }
+    } catch (error) {
+      console.error("Lane B site catalog integration failed:", error);
+      status.dataset.state = "error";
+      status.textContent = "Site data unavailable. Waiting for a working /lib/visibility.js from Lane A.";
+    }
+  </script>
+</body>
+</html>
