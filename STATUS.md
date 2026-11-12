@@ -170,7 +170,7 @@ D. **getCoverage()/getMetadata()** (or fields on existing exports)
 
 ## 8. Phased delivery / acceptance gates (existing PLAN criteria preserved)
 **Gate 0 — M0 / infrastructure (IMMEDIATE):**
-- Lane A completes/verifies ten-site catalog (currently 6 sourced/verified, 4 south-pole placeholders). Export coordsVerified/note.
+- Lane A has already sourced all 10 site coordinates (including four **representative**, not exact landing, south-polar points). Confirm catalog metadata is exposed by listSites(); coordinate-frame/datum alignment still requires M1 validation.
 - Lane B migrates the existing simple /web/index.html into a minimal Vite/TS app, importing ../lib/visibility.js; build must include source outside /web correctly. Choose one canonical Vite config/root, verify dev, production build, actual hosted URL, phone viewport, mock banner and all ten names. Static deployment can use GitHub Pages or equivalent, but require correct repository subpath/base URLs. Do not ship a broken static import.
 - PASS when deployed ten-name list works, source verification is honest, and both humans sign off. Do not mark done merely because files were committed.
 
@@ -212,7 +212,7 @@ D. **getCoverage()/getMetadata()** (or fields on existing exports)
 2. Recommend precise, minimal signatures for getSceneState/getTimeline/getHorizon or an equally small combined API. Provide concrete NASA/JPL source, frame, orientation strategy and feasible date coverage, including historic Apollo handling.
 3. Identify a credible Moon-attitude source / pipeline that allows surface sites to stay geographically correct during date changes; call out if full consistency cannot be validated in the allotted time.
 4. Confirm fixes to listSites() metadata and false "real terrain" label under MOCK.
-5. Continue Lane A's current **single next task** (four sourced polar-site representative coordinates) rather than attempting all newly proposed milestones at once.
+5. Continue Lane A's current **single next task**: M1 step 1, verify Horizons' lunar surface observer configuration from documentation and fetch/check one verified site (Apollo 11). The 10-site catalog is already fully sourced; do not re-source it as the next task.
 
 **Immediate Lane B next task (unchanged until M0 passes):** Vite migration + verified deployed ten-site catalog, entirely in /web. DO NOT start full OzAILabs import, 3D scene or new ephemeris calculations before that acceptance check.
 
