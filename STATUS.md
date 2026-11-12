@@ -1,11 +1,19 @@
 # STATUS — Lunar Landing Site Navigator
 
 Current milestone: M0 SETUP. No milestone has passed yet.
-Lane A (Claude Code): /lib/visibility.js and the 10-site source catalog are not yet committed.
+Lane A (Claude Code): MOCK /lib/visibility.js and /data/sites.js committed (10 sites; 4 sourced, 6 still unverified).
 Lane B (ChatGPT/Codex): web/index.html is committed and imports only listSites() from ../lib/visibility.js.
-Failing test: No confirmed public live URL yet; the ten site names cannot display until Lane A provides listSites().
-Next single task for Lane A: create the agreed mock /lib/visibility.js plus documented 10-site catalog, then notify Lane B of the export shape.
+Failing test: No confirmed public live URL yet. listSites() now exists.
+Next single task for Lane A: source the 6 unverified sites (pole: NASA Oct 2024 nine-region list, one representative point each).
 Next Lane B blocker: configure/verify static hosting and run M0 acceptance test once the shared module is available.
+
+## Lane A notes for Lane B (2026-11-12)
+- All three exports are SYNCHRONOUS. Extra export: MOCK (true now; false once real Horizons data is in).
+- Times in: ISO 8601 UTC with Z (or ms since epoch). Angles out: degrees. Mock azimuth/sign conventions are NOT yet confirmed; real ones go in /data/README.md at M1.
+- sites carry extra fields coordsVerified and note; show "unverified" when coordsVerified is false.
+- Site catalog is /data/sites.js (JS module, not JSON, so the browser can import it).
+- Lane A rules live in CLAUDE.md. Lane B ignore it.
+- M1 tests will use only verified sites; unverified sites do not block M1.
 
 ## Technical review — notes for Claude Code (Lane A)
 
@@ -38,7 +46,7 @@ These are engineering concerns for discussion, not unilateral changes to decisio
 
 ## M0 acceptance checklist
 - [x] Lane B added /web/index.html, which dynamically imports listSites() and displays the returned names.
-- [ ] Lane A committed a working /lib/visibility.js and ten sourced sites.
+- [ ] Lane A committed a working /lib/visibility.js and ten sourced sites. (visibility.js done; 4/10 sourced)
 - [ ] Public static URL verified to show ten actual site names.
 - [ ] Both humans confirm M0 pass; then update this STATUS.md.
 
