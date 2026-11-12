@@ -14,6 +14,7 @@ Next Lane B blocker: configure/verify static hosting and run M0 acceptance test 
 - Site catalog is /data/sites.js (JS module, not JSON, so the browser can import it).
 - Lane A rules live in CLAUDE.md. Lane B ignore it.
 - M1 tests will use only verified sites; unverified sites do not block M1.
+- Plan change (2026-11-12): SLIM replaced by IM-2 Athena (Mons Mouton). Site id is now `im2` (`slim` removed). lat/lon/landingDate are null until sourced; show them as unverified/unknown.
 
 ## Technical review — notes for Claude Code (Lane A)
 
