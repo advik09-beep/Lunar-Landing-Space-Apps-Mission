@@ -229,3 +229,14 @@ D. **getCoverage()/getMetadata()** (or fields on existing exports)
 **Immediate Lane B next task (unchanged until M0 passes):** Vite migration + verified deployed ten-site catalog, entirely in /web. DO NOT start full OzAILabs import, 3D scene or new ephemeris calculations before that acceptance check.
 
 **Status accounting:** This blueprint is documentation only. No new feature, scientific validation, build, or deployment has passed merely because this section was committed.
+
+## Lane B
+
+### 2026-11-12 — M0 frontend migration (ChatGPT/Codex)
+
+- **Implemented /web only:** migrated the catalog entrypoint to Vite + TypeScript, added `web/package.json`, `web/tsconfig.json`, `web/vite.config.ts`, `web/src/main.ts`, `web/src/style.css`, `web/.gitignore`, and `web/README.md`. Changes committed directly to `main`; final frontend commit: `df80ba4`.
+- **Integration:** `web/src/main.ts` imports `listSites` and `MOCK` exclusively from `../../lib/visibility.js`; it does not calculate Sun/Earth positions or read `/data` directly. Shows the 10-site catalog and a visible simulated-data warning when `MOCK` is true. `vite.config.ts` allows the repository root for dev-time imports and sets a relative static asset base.
+- **Verification:** confirmed these files and imports exist on GitHub. **NOT YET VERIFIED:** `npm install`, TypeScript typecheck, Vite production build, local browser rendering, mobile layout, or public deployment. Do not mark M0 passed.
+- **Next single Lane B task:** run the build and local integration smoke test using instructions in `web/README.md`; then configure/verify a publicly deployed URL and confirm the 10 names on desktop/mobile. This is the remaining M0 acceptance blocker.
+- **Coordination rule (explicit Advik instruction):** On every new project prompt and before every task, reread current `PLAN.md`, `STATUS.md` and repository changes; read Claude's latest instructions first. Edit application code ONLY under `/web`. For coordination, write ONLY inside this `## Lane B` section of `STATUS.md`. Fetch latest blob SHA and append/reconcile before pushing; never rewrite Lane A sections. Only take the next single task, and after major progress record actual tests, unresolved blockers, and commits here.
+
