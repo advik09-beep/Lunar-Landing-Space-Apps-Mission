@@ -1,10 +1,10 @@
 # STATUS — Lunar Landing Site Navigator
 
 Current milestone: M0 SETUP. No milestone has passed yet.
-Lane A (Claude Code): MOCK /lib/visibility.js and /data/sites.js committed (10 sites; 4 sourced, 6 still unverified).
+Lane A (Claude Code): MOCK /lib/visibility.js and /data/sites.js committed (10 sites; 6 sourced, 4 south pole sites still unverified).
 Lane B (ChatGPT/Codex): web/index.html is committed and imports only listSites() from ../lib/visibility.js.
 Failing test: No confirmed public live URL yet. listSites() now exists.
-Next single task for Lane A: source the 6 unverified sites (pole: NASA Oct 2024 nine-region list, one representative point each).
+Next single task for Lane A: source the 4 south pole sites (pole: NASA Oct 2024 nine-region list, one representative point each).
 Next Lane B blocker: configure/verify static hosting and run M0 acceptance test once the shared module is available.
 
 ## Lane A notes for Lane B (2026-11-12)
@@ -14,7 +14,7 @@ Next Lane B blocker: configure/verify static hosting and run M0 acceptance test 
 - Site catalog is /data/sites.js (JS module, not JSON, so the browser can import it).
 - Lane A rules live in CLAUDE.md. Lane B ignore it.
 - M1 tests will use only verified sites; unverified sites do not block M1.
-- Plan change (2026-11-12): SLIM replaced by IM-2 Athena (Mons Mouton). Site id is now `im2` (`slim` removed). lat/lon/landingDate are null until sourced; show them as unverified/unknown.
+- Plan change (2026-11-12): SLIM replaced by IM-2 Athena (Mons Mouton). Site id is now `im2` (`slim` removed). Now sourced (LROC): -84.7906, 29.1957E, ~2025-03-06T17:30Z.
 
 ## Technical review — notes for Claude Code (Lane A)
 
@@ -47,9 +47,15 @@ These are engineering concerns for discussion, not unilateral changes to decisio
 
 ## M0 acceptance checklist
 - [x] Lane B added /web/index.html, which dynamically imports listSites() and displays the returned names.
-- [ ] Lane A committed a working /lib/visibility.js and ten sourced sites. (visibility.js done; 4/10 sourced)
+- [ ] Lane A committed a working /lib/visibility.js and ten sourced sites. (visibility.js done; 6/10 sourced)
 - [ ] Public static URL verified to show ten actual site names.
 - [ ] Both humans confirm M0 pass; then update this STATUS.md.
 
 ## Change ownership
 Lane A owns /scripts, /data, /lib. Lane B owns /web. STATUS.md is shared for coordination by explicit instruction. Leave PLAN.md unchanged unless both humans agree.
+
+## Lane A source log (2026-11-12)
+- IM-1, IM-2 coords from LROC located-lander pages; IM-2 time minute-precision only (NASA).
+- Apollo 11/12/17 landing times confirmed on NSSDCA spacecraft pages.
+- Chandrayaan-3 landing time is secondary (collectSPACE) and approximate; Chandrayaan-3 kind changed to 'agency'.
+- No source here states a reference frame except JAXA (ME); frames to be fixed in /data/README.md at M1.
