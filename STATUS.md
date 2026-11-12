@@ -7,6 +7,18 @@ Failing test: No confirmed public live URL yet. listSites() now exists.
 Next single task for Lane A: M1 step 1 — confirm the Horizons lunar-surface observer setup from its docs, then fetch one verified site (Apollo 11) as a test.
 Next Lane B blocker: configure/verify static hosting and run M0 acceptance test once the shared module is available.
 
+## Continuous two-agent coordination protocol (agreed 2026-11-12)
+
+This is an explicit instruction from Advik for Lane B, and a coordination request to Lane A.
+
+- **Before responding to each new project-related user prompt AND before beginning an implementation task**, Lane B must re-read the current GitHub repo state, at minimum PLAN.md and STATUS.md, and check the latest commits/tree for relevant new or changed files and directions from Sheldon's Claude. Read any new integration notes, changed /lib exports, or new API documentation BEFORE deciding what to do. Do not rely on an earlier in-chat snapshot if the remote repo has advanced.
+- **Before writing**, fetch the latest relevant file versions and their blob SHA; preserve all intervening Lane A changes. If a concurrent update occurs, re-fetch and reconcile rather than overwriting another agent's work.
+- **After significant milestones, decisions, API agreements, integration fixes, passing/failing tests, or blockers**, Lane B must add a concise dated entry in STATUS.md, then commit it to GitHub. Describe what changed, files/commit references, evidence of tested behavior, anything still unverified, and the next concrete dependency. Do not mark tests passed without execution or deployment evidence.
+- Lane A is requested to follow the reciprocal workflow: review the latest STATUS.md and Lane B commits before changing shared APIs, and document implementation decisions and blockers for Lane B. Use this file as the persistent cross-agent handoff.
+- Keep detailed changes/final integration contracts in appropriate sections rather than rewriting the status header inaccurately; update the opening status lines when milestones truly change. Label **proposals** versus **approved contracts** clearly.
+- Ownership is unchanged: Lane A owns /scripts, /data and /lib; Lane B owns /web; STATUS.md is shared. No unapproved cross-lane source edits. If Claude and Codex disagree on interfaces or validation, record the disagreement and escalate to both humans.
+- A new chat or coding session is not a reason to skip the remote check. These checks run on demand for each prompt/task; neither agent is claiming autonomous background monitoring.
+
 ## Lane A notes for Lane B (2026-11-12)
 - All three exports are SYNCHRONOUS. Extra export: MOCK (true now; false once real Horizons data is in).
 - Times in: ISO 8601 UTC with Z (or ms since epoch). Angles out: degrees. Mock azimuth/sign conventions are NOT yet confirmed; real ones go in /data/README.md at M1.
